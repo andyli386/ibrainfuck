@@ -2,4 +2,6 @@ pyzmq
 jinja2
 tornado
 jsonschema
-ipython==3.1
+jupyter
+notebook
+ipython==8.4.0

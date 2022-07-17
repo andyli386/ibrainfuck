@@ -1,6 +1,6 @@
 __author__ = 'robbielynch'
 
-from IPython.kernel.zmq.kernelbase import Kernel
+from ipykernel.kernelbase import Kernel
 from bfinterpreter.brainfuck import Brainy
 
 class BrainfuckKernel(Kernel):
@@ -28,8 +28,8 @@ class BrainfuckKernel(Kernel):
                }
 
 if __name__ == '__main__':
-    from IPython.kernel.zmq.kernelapp import IPKernelApp
+    from ipykernel.kernelapp import IPKernelApp
     IPKernelApp.launch_instance(kernel_class=BrainfuckKernel)
 else:
-    from IPython.kernel.zmq.kernelapp import IPKernelApp
+    from ipykernel.kernelapp import IPKernelApp
     IPKernelApp.launch_instance(kernel_class=BrainfuckKernel)

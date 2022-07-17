@@ -10,18 +10,8 @@ NOTEBOOK_FOLDER=notebooks
 PYTHON=$(shell which python3)
 BFDIR=${shell pwd}
 
-#########################################
-# Python 3.4 Specific
-#########################################
-PY3=python3.4
-PY3_VENV=./.venv-py3
-PY3_VENV_BIN=$(PY3_VENV)/bin/$(PY3)
 
-$(PY3_VENV_BIN):
-	@virtualenv --python=$(PY3) $(PY3_VENV)
-
-deps: $(PY3_VENV_BIN)
-	@. $(PY3_VENV)/bin/activate && \
+deps: $(PYTHON)
 	pip install -r requirements.txt
 	@echo "[BRAINFUCK KERNEL - MAKE]Creating brainfuck kernel in IPython kernel directory..."
 	mkdir -p ~/.ipython/kernels/brainfuck/
@@ -29,7 +19,6 @@ deps: $(PY3_VENV_BIN)
 
 shell-base:
 	@echo "Starting Brainfuck Console..."
-	. $(PY3_VENV)/bin/activate && \
 	ipython3 console --kernel brainfuck
 
 bfshell:
@@ -38,13 +27,12 @@ bfshell:
 bfshell-deps: deps shell-base
 
 clean:
-	rm -rf $(PY3_VENV)
+	rm -rf ~/.ipython/kernels/brainfuck/
 
 demo:
 	@echo "Starting IBrainfuck Notebook Demo..."
-	@. $(PY3_VENV)/bin/activate && \
-    cd ${BFDIR} && \
-	ipython3 notebook $(NOTEBOOK_FOLDER)
+	cd ${BFDIR} && \
+	jupyter notebook $(NOTEBOOK_FOLDER)
 
 demo-no-deps:
 	@make demo
